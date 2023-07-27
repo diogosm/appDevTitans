@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">appTitans</string>
+    <string name="loginText">Login</string>
+    <string name="helloUser">Olá Usuário!</string>
+    <string name="boasVindas">Bem vindo!</string>
+    <string name="botaoLogin">Entrar</string>
+</resources>
