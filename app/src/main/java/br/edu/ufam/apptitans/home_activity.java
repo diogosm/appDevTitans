@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -88,6 +89,8 @@ public class home_activity extends AppCompatActivity implements MyModalFragment.
 
     @Override
     public void onButtonClicked(String v1, String v2){
-        Toast.makeText(this, "v1 e v2" + v1 + " " + v2, Toast.LENGTH_SHORT).show();
+        adapter.update();
+        adapter.notifyDataSetChanged();
+        Log.i("BANCO", "Atualizando o recycler");
     }
 }
