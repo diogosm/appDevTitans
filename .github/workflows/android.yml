@@ -3,6 +3,8 @@ name: Android CI/Build
 on:
   push:
     branches: [ "prod" ]
+    tags:
+      - 'version*'
 
 jobs:
   build:
