@@ -39,4 +39,4 @@ jobs:
         draft: false
         prerelease: true
         files: app_apk/app-release.apk
-        token: ${{ secret.buildApkDevTitans }}
+        token: ${{ secrets.buildApkDevTitans }}
