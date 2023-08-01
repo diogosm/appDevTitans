@@ -19,4 +19,70 @@
 
 ### v 1.0
 
+### Banco de dados, crie uma classe de helper para criar ou abrir o banco e retornar uma variável com uma variável para o contexto do banco. Para uso, basta instanciar o objeto dessa classe.
+
+Classe:
+
+```sql
+public class DB  {
+    private SQLiteDatabase database;
+
+    public DB(Context context){
+        database = context.openOrCreateDatabase("meu_banco.db", Context.MODE_PRIVATE,
+                null);
+    }
+
+    public SQLiteDatabase getDb(){
+        return this.database;
+    }
+}
+```
+
+Para usar, utilize um objeto da classe helper para executar queries:
+
+```java
+// passo 1. Criar o banco
+// table ITEM
+// colunas mood, musica
+String query_cria_banco = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + "" +
+        "(MOOD TEXT NOT NULL, MUSICA TEXT NOT NULL)";
+//chamo a variavel de banco
+DB db = new DB(context);
+SQLiteDatabase database = db.getDb();
+//executo a query
+database.execSQL(query_cria_banco);
+```
+
+Ou receber os resultados de queries:
+
+```java
+public ArrayList<Item> getList(){
+    //conecta no banco
+    DB db = new DB(context);
+    SQLiteDatabase database = db.getDb();
+
+    String query_busca = "SELECT * FROM " + DATABASE_TABLE;
+    Cursor cursor = database.rawQuery(query_busca, null);
+
+    //defino uma variavel de retorno
+    ArrayList<Item> itemsReposta = new ArrayList<>();
+
+    if(cursor.moveToFirst()){
+        do {
+            @SuppressLint("Range") Item novoItem = new Item(
+                    cursor.getString(cursor.getColumnIndex("MOOD")),
+                    cursor.getString(cursor.getColumnIndex("MUSICA"))
+            );
+            itemsReposta.add(novoItem);
+        } while(cursor.moveToNext());
+    }
+
+    Log.i("BANCO", "Consulta de busca feita!");
+
+    return itemsReposta;
+}
+```
+
+Para usar o banco de dados,
+
 ## Doc
